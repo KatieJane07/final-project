@@ -33,7 +33,7 @@ let bikeBgImg;
 
 function preload() {
   //bike game
-  //bikeBgImg = loadImage("bikeBackground.jpg");
+  bikeBgImg = loadImage("bikeBackground.jpg");
   //bikerImg
   //bushImg
   //crashImg
@@ -51,7 +51,7 @@ function setup() {
 }
 
 function draw() {
-  background(220);
+  //background(220);
   bikeGame();
   iSpyGame();
  
@@ -90,7 +90,7 @@ function iSpyGame() {
 //bikeGame
 function displayBike() {
   if (scene === "bikeGame") {
-    //background(bikeBgImg);
+    background(bikeBgImg);
     fill("pink");
     circle(biker.x, biker.y, biker.radius);
     line(width / 3, height, width / 3, 0);
