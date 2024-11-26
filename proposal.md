@@ -12,9 +12,10 @@ I plan to add blinking to switch between scenes of the story. If not blinking, t
 
 ## Nice to Have
 - blinking switches frame
-- some sort of animation
+- html website
 - eye tracking movement, more than just blinking
 - some sort of customization
+- some sort of animation
 - Choose your own adventure elements
 
 ## Storyline ideassss
