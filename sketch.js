@@ -1,6 +1,6 @@
-// Project Title
-// Your Name
-// Date
+// CompSci30 final
+// Katie Strawson
+// date
 //
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
@@ -10,26 +10,21 @@ let width = 400;
 let height = 600;
 let scene = "bikeGame";
 
+//images
+let bikeBgImg;
+
 //bike game
+let theBushes = [];
+let collide = false;
 let biker = {
   x: width / 2,
   y: height / 5 * 4,
   radius: 50,
 };
-let x = width / 2;
-let y = height / 5 * 4;
-let theBushes = [];
-let bush = {
-  x: width / 2 - width / 3,
-  y: 0,
-  speed: 1,
-  radius: 40,
-};
-let radius = 50;
-let collide = false;
 
-//images
-let bikeBgImg;
+
+
+//iSpy
 
 function preload() {
   //bike game
@@ -48,13 +43,14 @@ function preload() {
 }
 function setup() {
   createCanvas(width, height);
+  spawnBushes();
+  
 }
 
 function draw() {
   //background(220);
   bikeGame();
   iSpyGame();
- 
 }
 
 function mousePressed() {
@@ -78,6 +74,7 @@ function keyPressed() {
 
 function bikeGame() {
   displayBike();
+  //spawnBushes();
   displayBushes();
   bikeGameRules();
 }
@@ -99,19 +96,29 @@ function displayBike() {
 }
 
 //bikeGame
-// function killBush() {
-//   for (item of theBushes) {
-//     if (bush.y < height) {
-//       theBushes.pop(item);
-//       theBushes.push(bush);
-//     }
-//   }
-// }
+function spawnBushes() {
+  let someBush = {
+    x: width/2,
+    y: 0,
+    speed: 0.5,
+    radius: 40,
+  };
+  theBushes.push(someBush);
+}
 
 //bikeGame
 function displayBushes() {
-  fill("green");
   for (let bush of theBushes) {
+    let choice = random(90);
+    if (choice > 60 ) {
+      bush.x -= width/3;
+    }
+    else if (choice > 30) {
+      bush.x += width/3;
+    }
+
+
+    fill("green");
     circle(bush.x, bush.y, bush.radius * 2);
     bush.y += bush.speed;
   }
@@ -119,17 +126,20 @@ function displayBushes() {
 
 //bikeGame
 function bikeGameRules() {
-  let distanceAway = dist(biker.x, biker.y, bush.x, bush.y);
-  if (distanceAway < bush.radius) {
-    collide = true;
-  }
-  else {
-    collide = false;
-  }
-  if (collide === true) {
-    text("end game", width / 2, height / 2);
-    //you crashed image
-    //scene = ""
+  for (let bush of theBushes) {
+    let distanceAway = dist(biker.x, biker.y, bush.x, bush.y);
+    if (distanceAway < bush.radius) {
+      collide = true;
+    }
+    else {
+      collide = false;
+    }
+    if (collide === true) {
+      text("end game", width / 2, height / 2);
+      //you crashed image
+      //scene = ""
+    }
+
   }
 }
 

@@ -6,7 +6,7 @@ I plan to add blinking to switch between scenes of the story. If not blinking, t
 
 ## Needs to Have
 - different scenes/ levels
-- videos
+- videos / cutscenes
 - audio narration
 - mouse interaction / game element
 
