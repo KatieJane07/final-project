@@ -9,6 +9,13 @@
 let width = 400;
 let height = 600;
 let scene = "bikeGame";
+// bikeGame
+// - Cat
+// - Outside
+// - maze mini game
+// - House
+// - Witch
+// iSpy
 
 //images
 let bikeBgImg;
@@ -43,17 +50,22 @@ function preload() {
 }
 function setup() {
   createCanvas(width, height);
+
   spawnBushes();
-  
+  window.setInterval(spawnBushes,2000);
 }
 
 function draw() {
-  //background(220);
-  bikeGame();
-  iSpyGame();
+  if (scene === "bikeGame") {
+    bikeGame();
+  }
+  else if (scene === "iSpy") {
+    iSpyGame();
+  }
 }
 
 function mousePressed() {
+
 
 }
 
@@ -69,12 +81,17 @@ function keyPressed() {
         biker.x += width / 3;
       }
     }
+    // if (collide === true && keyCode === UP_ARROW) {
+    //   text("AHHHHH", width/2, height/2);
+    //   //scene = "iSpy";
+    // }
+      
   }
 }
 
 function bikeGame() {
+  moveBushes();
   displayBike();
-  //spawnBushes();
   displayBushes();
   bikeGameRules();
 }
@@ -86,13 +103,12 @@ function iSpyGame() {
 
 //bikeGame
 function displayBike() {
-  if (scene === "bikeGame") {
-    background(bikeBgImg);
-    fill("pink");
-    circle(biker.x, biker.y, biker.radius);
-    line(width / 3, height, width / 3, 0);
-    line(width / 3 * 2, height, width / 3 * 2, 0);
-  }
+  background(bikeBgImg);
+  fill("pink");
+  circle(biker.x, biker.y, biker.radius);
+  line(width / 3, height, width / 3, 0);
+  line(width / 3 * 2, height, width / 3 * 2, 0);
+    
 }
 
 //bikeGame
@@ -100,7 +116,7 @@ function spawnBushes() {
   let someBush = {
     x: width/2,
     y: 0,
-    speed: 0.5,
+    speed: 3,
     radius: 40,
   };
   theBushes.push(someBush);
@@ -109,18 +125,17 @@ function spawnBushes() {
 //bikeGame
 function displayBushes() {
   for (let bush of theBushes) {
-    let choice = random(90);
-    if (choice > 60 ) {
-      bush.x -= width/3;
-    }
-    else if (choice > 30) {
-      bush.x += width/3;
-    }
-
+    // make it go through this once, not every frame, call from setup?
+    // let choice = random(90);
+    // if (choice > 60 ) {
+    //   bush.x -= width/3;
+    // }
+    // else if (choice > 30) {
+    //   bush.x += width/3;
+    // }
 
     fill("green");
     circle(bush.x, bush.y, bush.radius * 2);
-    bush.y += bush.speed;
   }
 }
 
@@ -137,18 +152,25 @@ function bikeGameRules() {
     if (collide === true) {
       text("end game", width / 2, height / 2);
       //you crashed image
-      //scene = ""
+      scene = "iSpy";
     }
 
   }
 }
 
+//bike Game
+function moveBushes() {
+  for (let bush of theBushes) {
+    bush.y += bush.speed;
+  }
+}
+
 //iSpy Game
 function displayiSpy() {
-  if (scene === "iSpy") {
-    //background(iSpyBgImg)
+  //background(iSpyBgImg)
+  background(220);
+  text("hiii" ,width/2,height/2);
 
-  }
 }
 
 //iSpy Game
