@@ -8,7 +8,7 @@
 //canvas and display
 let width = 400;
 let height = 600;
-let scene = "bikeGame";
+let scene = "homeScreen";
 // bikeGame
 // - Cat
 // - Outside
@@ -19,6 +19,8 @@ let scene = "bikeGame";
 
 //images
 let bikeBgImg;
+let bikerImg;
+let bushImg;
 //let bushTextureImg;
 
 //bike game
@@ -46,8 +48,8 @@ let biker = {
 function preload() {
   //bike game
   bikeBgImg = loadImage("bikeBackground.jpg");
-  //bikerImg
-  //bushImg
+  bikerImg = loadImage("biker.png");
+  bushImg = loadImage("bush.png");
   //crashImg
 
   //ispy
@@ -68,10 +70,13 @@ function setup() {
 }
 
 function draw() {
+  if (scene === "homeScreen") {
+    homeScreen();
+  }
   if (scene === "bikeGame") {
     bikeGame();
   }
-  else if (scene === "iSpy") {
+  if (scene === "iSpy") {
     iSpyGame();
   }
 }
@@ -101,6 +106,12 @@ function keyPressed() {
   }
 }
 
+function homeScreen() {
+  background(142,242,111);
+  //image(start,);
+  //if (mouseIsPressed === true && mousePressed.x <  )
+  //scene = "bikeGame";
+}
 function bikeGame() {
   moveBushes();
   displayBike();
@@ -109,6 +120,7 @@ function bikeGame() {
 }
 
 function iSpyGame() {
+  cursor(CROSS);
   displayiSpy();
   placeItems();
 }
@@ -116,8 +128,11 @@ function iSpyGame() {
 //bikeGame
 function displayBike() {
   background(bikeBgImg);
-  fill("pink");
-  circle(biker.x, biker.y, biker.radius);
+  imageMode(CENTER);
+  image(bikerImg, biker.x, biker.y, 100, 100);
+  imageMode(CORNER);
+  // fill("pink");
+  // circle(biker.x, biker.y, biker.radius);
   line(width / 3, height, width / 3, 0);
   line(width / 3 * 2, height, width / 3 * 2, 0);
     
@@ -127,7 +142,6 @@ function displayBike() {
 function spawnBushes() {
   let someBush = {
     x: width/2,
-    choice: random(3),
     y: 0,
     speed: 3,
     radius: 40,
@@ -138,18 +152,21 @@ function spawnBushes() {
 //bikeGame
 function displayBushes() {
   for (let bush of theBushes) {
-    if (bush.choice === 0) {
-      bush.x = width/2 - width/3;
+    if (random(3) === 0) {
+      bush.x -= width/3;
     }
-    else if (bush.choice === 1) {
-      bush.x = width/2 + width/3;
+    else if (random(3) === 1) {
+      bush.x += width/3;
     }
-    else if (bush.choice === 2) {
+    else if (random(3) === 2) {
       bush.x = width/2;
     }
 
-    fill("green");
-    circle(bush.x, bush.y, bush.radius * 2);
+    imageMode(CENTER);
+    image(bushImg, bush.x, bush.y, 130, 130);
+    imageMode(CORNER);
+    // fill("green");
+    // circle(bush.x, bush.y, bush.radius * 2);
   }
 }
 

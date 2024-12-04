@@ -30,4 +30,13 @@ I plan to add blinking to switch between scenes of the story. If not blinking, t
 - ispy mini game
 - Bike
 
+## to do
+- bushes spawn in all lanes
+- cat paw cursor (design 32x32 image)
+- images for find it items
+- import crash image
+- figure out cutscene videos
+- background for ispy game
+- how to play popup
+- opening scene 
 
