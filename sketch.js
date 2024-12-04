@@ -8,7 +8,7 @@
 //canvas and display
 let width = 400;
 let height = 600;
-let scene = "homeScreen";
+let scene = "bikeGame";
 // bikeGame
 // - Cat
 // - Outside
@@ -145,23 +145,23 @@ function spawnBushes() {
     y: 0,
     speed: 3,
     radius: 40,
+    choice: int(random(3)),
   };
+  if (someBush.choice === 0) {
+    someBush.x -= width/3;
+  }
+  else if (someBush.choice === 1) {
+    someBush.x += width/3;
+  }
+  else if (someBush.choice === 2) {
+    someBush.x = width/2;
+  }
   theBushes.push(someBush);
 }
 
 //bikeGame
 function displayBushes() {
   for (let bush of theBushes) {
-    if (random(3) === 0) {
-      bush.x -= width/3;
-    }
-    else if (random(3) === 1) {
-      bush.x += width/3;
-    }
-    else if (random(3) === 2) {
-      bush.x = width/2;
-    }
-
     imageMode(CENTER);
     image(bushImg, bush.x, bush.y, 130, 130);
     imageMode(CORNER);
