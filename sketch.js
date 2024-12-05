@@ -49,7 +49,7 @@ let biker = {
 
 function preload() {
   startImg = loadImage("start.png");
-  cursorImg = loadImage("cursor.png");
+  //cursorImg = loadImage("cursor.png");
   //bike game
   bikeBgImg = loadImage("bikeBackground.jpg");
   bikerImg = loadImage("biker.png");
