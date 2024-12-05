@@ -127,7 +127,7 @@ function bikeGame() {
 }
 
 function iSpyGame() {
-  cursor(cursorImg);
+  //cursor(cursorImg);
   displayiSpy();
   placeItems();
 }
