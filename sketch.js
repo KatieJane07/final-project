@@ -8,7 +8,7 @@
 //canvas and display
 let width = 400;
 let height = 600;
-let scene = "bikeGame";
+let scene = "homeScreen";
 // bikeGame
 // - Cat
 // - Outside
@@ -18,6 +18,8 @@ let scene = "bikeGame";
 // iSpy
 
 //images
+let startImg;
+let cursorImg;
 let bikeBgImg;
 let bikerImg;
 let bushImg;
@@ -46,6 +48,8 @@ let biker = {
 // let graphics, graphics2;
 
 function preload() {
+  startImg = loadImage("start.png");
+  cursorImg = loadImage("cursor.png");
   //bike game
   bikeBgImg = loadImage("bikeBackground.jpg");
   bikerImg = loadImage("biker.png");
@@ -66,7 +70,7 @@ function setup() {
   createCanvas(width, height);
 
   spawnBushes();
-  window.setInterval(spawnBushes,2000);
+  window.setInterval(spawnBushes, 500);
 }
 
 function draw() {
@@ -108,9 +112,12 @@ function keyPressed() {
 
 function homeScreen() {
   background(142,242,111);
-  //image(start,);
-  //if (mouseIsPressed === true && mousePressed.x <  )
-  //scene = "bikeGame";
+  //make even
+  image(startImg, 50, 200, 300 ,90);
+  //mouse within box
+  if (mouseIsPressed === true && mouseX < width/2 ) {
+    scene = "bikeGame";
+  }
 }
 function bikeGame() {
   moveBushes();
@@ -120,7 +127,7 @@ function bikeGame() {
 }
 
 function iSpyGame() {
-  cursor(CROSS);
+  cursor(cursorImg);
   displayiSpy();
   placeItems();
 }
@@ -143,7 +150,7 @@ function spawnBushes() {
   let someBush = {
     x: width/2,
     y: 0,
-    speed: 3,
+    speed: 7,
     radius: 40,
     choice: int(random(3)),
   };
