@@ -19,7 +19,6 @@ let scene = "homeScreen";
 
 //images
 let startImg;
-let cursorImg;
 let bikeBgImg;
 let bikerImg;
 let bushImg;
@@ -49,7 +48,6 @@ let biker = {
 
 function preload() {
   startImg = loadImage("start.png");
-  //cursorImg = loadImage("cursor.png");
   //bike game
   bikeBgImg = loadImage("bikeBackground.jpg");
   bikerImg = loadImage("biker.png");
@@ -127,7 +125,7 @@ function bikeGame() {
 }
 
 function iSpyGame() {
-  //cursor(cursorImg);
+  cursor("cursor.png");
   displayiSpy();
   placeItems();
 }

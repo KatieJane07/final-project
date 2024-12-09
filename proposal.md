@@ -40,3 +40,8 @@ I plan to add blinking to switch between scenes of the story. If not blinking, t
 - how to play popup
 - opening scene 
 
+wa woah why am i? who am i? WHAT!?  *zoom out* meow meow meow meow meow aww silly kitty *zoom in* what? what do i do now?
+
+go outside
+left or right
+left right straight
