@@ -10,6 +10,7 @@ let width = 400;
 let height = 600;
 let scene = "homeScreen";
 // bikeGame
+// crash
 // - Cat
 // - Outside
 // - mazeGame (stolen code !)
@@ -22,6 +23,7 @@ let startImg;
 let bikeBgImg;
 let bikerImg;
 let bushImg;
+let crashImg;
 //let bushTextureImg;
 
 //bike game
@@ -52,7 +54,7 @@ function preload() {
   bikeBgImg = loadImage("bikeBackground.jpg");
   bikerImg = loadImage("biker.png");
   bushImg = loadImage("bush.png");
-  //crashImg
+  crashImg = loadImage("crash.jpg");
 
   //ispy
   //ispy bg
@@ -77,6 +79,12 @@ function draw() {
   }
   if (scene === "bikeGame") {
     bikeGame();
+  }
+  if (scene === "crash") {
+    background(crashImg);
+    if (keyIsPressed) {
+      scene = "iSpy"; //cutscene actually
+    }
   }
   if (scene === "iSpy") {
     iSpyGame();
@@ -116,6 +124,7 @@ function homeScreen() {
   if (mouseIsPressed === true && mouseX < width/2 ) {
     scene = "bikeGame";
   }
+  //add like how to play and stuff
 }
 function bikeGame() {
   moveBushes();
@@ -188,7 +197,8 @@ function bikeGameRules() {
     if (collide === true) {
       text("end game", width / 2, height / 2);
       //you crashed image
-      scene = "iSpy";
+      scene = "crash";
+      //scene = "iSpy";
     }
 
   }

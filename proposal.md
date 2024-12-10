@@ -2,12 +2,10 @@
 For the final project I want to make a game/story that takes you first person through the life of guy who turned into a cat. 
 The story will then lead the player through the process of becoming human again. With that, there will be stories/video-esq scenes and little mini games.
 
-I plan to add blinking to switch between scenes of the story. If not blinking, then space bar.
-
 ## Needs to Have
 - different scenes/ levels
 - videos / cutscenes
-- audio narration
+- audio narration 
 - mouse interaction / game element
 
 ## Nice to Have
@@ -31,14 +29,10 @@ I plan to add blinking to switch between scenes of the story. If not blinking, t
 - Bike
 
 ## to do
-- bushes spawn in all lanes
-- cat paw cursor (design 32x32 image)
 - images for find it items
-- import crash image
 - figure out cutscene videos
 - background for ispy game
 - how to play popup
-- opening scene 
 
 wa woah why am i? who am i? WHAT!?  *zoom out* meow meow meow meow meow aww silly kitty *zoom in* what? what do i do now?
 
