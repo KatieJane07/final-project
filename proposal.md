@@ -38,4 +38,7 @@ wa woah why am i? who am i? WHAT!?  *zoom out* meow meow meow meow meow aww sill
 
 go outside
 left or right
-left right straight
+left right straight back
+
+intersection 1,2,3,4,etcetc
+if left -> int 4 if int 4 and right etc etc
