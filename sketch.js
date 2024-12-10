@@ -214,6 +214,104 @@ function placeItems() {
   //randomly place 4 items to find based on a grid system
 }
 
+//ispy code stuf
+// let grid;
+// let cellSize;
+// const GRID_SIZE = 15;
+
+// function setup() {
+// createCanvas(400,600);
+//   cellSize = height/GRID_SIZE;
+
+//   grid = generateRandomGrid(GRID_SIZE, GRID_SIZE);
+// }
+
+// function windowResized() {
+//   if ( windowWidth < windowHeight) {
+//     resizeCanvas(windowWidth, windowWidth);
+//   }
+//   else {
+//     resizeCanvas(windowHeight, windowHeight);
+//   }
+//   cellSize = height/GRID_SIZE;
+// }
+
+// function draw() {
+//   background(12,23,53);
+//   displayGrid();
+
+// }
+
+// function mousePressed() {
+// }
+
+
+// function displayGrid() {
+//   for (let y = 0; y < GRID_SIZE; y++) {
+//     for (let x = 0; x < GRID_SIZE; x++) {
+//       if (grid[y][x] === 1) {
+//         //image 1
+//         fill("green");
+//       }
+//       else if (grid[y][x] === 2) {
+//         //image 2
+//         fill("red");
+//       }
+//       else if (grid[y][x] === 3) {
+//         //image 3
+//         fill("blue");
+//       }
+//       else if (grid[y][x] === 4) {
+//         //image 4
+//         fill("pink");
+//       }
+//       else if (grid[y][x] === 0) {
+//         fill(0, 0, 0, 0);
+//       }
+//       noStroke();
+//       square(x * cellSize , y * cellSize , cellSize);
+//     }
+//   }
+// }
+
+// function generateRandomGrid(cols, rows){
+//   let newGrid = [];
+//   for (let y = 0; y < rows; y++) {
+//     newGrid.push([]);
+//     for (let x = 0; x < cols; x++) {
+//       //make 4 coloured squares
+//       let x1 = Math.floor(random(width)/cellSize);
+//       let y1 = Math.floor(random(height)/cellSize);
+//       let x2 = Math.floor(random(width)/cellSize);
+//       let y2 = Math.floor(random(height)/cellSize);
+//       let x3 = Math.floor(random(width)/cellSize);
+//       let y3 = Math.floor(random(height)/cellSize);
+//       let x4 = Math.floor(random(width)/cellSize);
+//       let y4 = Math.floor(random(height)/cellSize);
+//       //pick a random number between 0 and width, 0 and height
+//       // place square there
+//       // if 1 x and 1 y === 2x and 2y then redraw or smth
+//       //let x = Math.floor(x1/cellSize);
+//       //let y = Math.floor(y1/cellSize);
+//     if (x1 >= 0 && x1 < GRID_SIZE && y1 >=0 && y1 < GRID_SIZE) {
+//       grid[y][x] = 1;
+//     }
+//        if (x2 >= 0 && x2 < GRID_SIZE && y2 >=0 && y2 < GRID_SIZE) {
+//       grid[y][x] = 2;
+//     }
+//        if (x3 >= 0 && x3 < GRID_SIZE && y3 >=0 && y3 < GRID_SIZE) {
+//       grid[y][x] = 3;
+//     }
+//        if (x4 >= 0 && x4 < GRID_SIZE && y4 >=0 && y4 < GRID_SIZE) {
+//       grid[y][x] = 4;
+//     }
+//     }
+//   }
+//   return newGrid;
+
+// }
+
+
 //MZE CODE
 // //Luca Del Priore MMP 310
 // //simple 3D maze game
