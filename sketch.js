@@ -82,7 +82,7 @@ function draw() {
   }
   if (scene === "crash") {
     background(crashImg);
-    if (keyIsPressed) {
+    if (keyIsPressed && keyCode === 32) {
       scene = "iSpy"; //cutscene actually
     }
   }
