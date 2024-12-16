@@ -49,7 +49,7 @@ let biker = {
 // let graphics, graphics2;
 
 function preload() {
-  startImg = loadImage("start.png");
+  //startImg = loadImage("start.png");
   //bike game
   bikeBgImg = loadImage("bikeBackground.jpg");
   bikerImg = loadImage("biker.png");
@@ -108,20 +108,23 @@ function keyPressed() {
         biker.x += width / 3;
       }
     }
-    // if (collide === true && keyCode === UP_ARROW) {
-    //   text("AHHHHH", width/2, height/2);
-    //   //scene = "iSpy";
-    // }
-      
   }
 }
 
 function homeScreen() {
   background(142,242,111);
   //make even
-  image(startImg, 50, 200, 300 ,90);
-  //mouse within box
-  if (mouseIsPressed === true && mouseX < width/2 ) {
+  //title
+  rect(50,50,300,100);
+  //start button
+  rect(50,180,300,100);
+  //rules
+  text('use the left and right arrow keys to move your character. Be careful not to crash into the bushes!', 50,310,350,385);
+  //rect(50, 310, 300,75);
+  //video 
+  rect(50,400,300,175);
+  //image(startImg, 50, 200, 300 ,90);
+  if (mouseIsPressed === true && mouseX > 50 && mouseX < 350 && mouseY > 200 && mouseY < 300) {
     scene = "bikeGame";
   }
   //add like how to play and stuff

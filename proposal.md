@@ -34,6 +34,12 @@ The story will then lead the player through the process of becoming human again.
 - background for ispy game
 - how to play popup
 
+title - 300x100
+start - 300x100
+rules - 300x75
+video - 300x175
+
+400x600
 wa woah why am i? who am i? WHAT!?  *zoom out* meow meow meow meow meow aww silly kitty *zoom in* what? what do i do now?
 
 go outside
