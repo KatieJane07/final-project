@@ -20,6 +20,8 @@ let scene = "homeScreen";
 
 //images
 let startImg;
+let titleImg;
+let rulesImg;
 let arrows;
 let bikeBgImg;
 let bikerImg;
@@ -51,6 +53,8 @@ let biker = {
 
 function preload() {
   //startImg = loadImage("start.png");
+  titleImg = loadImage("bikeGameTitle.jpg");
+  rulesImg = loadImage("bikeGameRules.jpg");
   arrows = loadImage("arrows.gif");
   //bike game
   bikeBgImg = loadImage("bikeBackground.jpg");
@@ -70,17 +74,17 @@ function preload() {
 }
 function setup() {
   createCanvas(width, height);
-
   spawnBushes();
-  window.setInterval(spawnBushes, 500);
 }
 
-function draw() {
+async function draw() {
+  setTimeout(spawnBushes, 500);
   if (scene === "homeScreen") {
     homeScreen();
   }
   if (scene === "bikeGame") {
     bikeGame();
+
   }
   if (scene === "crash") {
     background(crashImg);
@@ -92,6 +96,9 @@ function draw() {
     iSpyGame();
   }
 }
+
+
+
 
 function mousePressed() {
 
@@ -117,15 +124,19 @@ function homeScreen() {
   background(12, 205, 210);
   //title
   rect(50,50,300,100);
+  //start
   rect(50,180,300,100);
+  image(titleImg, 50, 50);
+  image(rulesImg, 50, 310);
+  
   //rules
-  text('use the left and right arrow keys to move your character. Be careful not to crash into the bushes!', 50,310,350,385);
+  
   //rect(50, 310, 300,75);
   //rect(50,400,300,175);
   image(arrows, 50, 400);
   noStroke();
   fill(12, 205, 210);
-  rect(262,552,83,20)
+  rect(262,552,88,20);
   //image(startImg, 50, 200, 300 ,90);
   if (mouseIsPressed === true && mouseX > 50 && mouseX < 350 && mouseY > 200 && mouseY < 300) {
     scene = "bikeGame";
