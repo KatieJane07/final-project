@@ -52,7 +52,7 @@ let biker = {
 // let graphics, graphics2;
 
 function preload() {
-  //startImg = loadImage("start.png");
+  startImg = loadImage("start.png");
   titleImg = loadImage("bikeGameTitle.jpg");
   rulesImg = loadImage("bikeGameRules.jpg");
   arrows = loadImage("arrows.gif");
@@ -75,10 +75,11 @@ function preload() {
 function setup() {
   createCanvas(width, height);
   spawnBushes();
+  window.setInterval(spawnBushes,650);
 }
 
-async function draw() {
-  setTimeout(spawnBushes, 500);
+function draw() {
+  // setTimeout(spawnBushes, 500);
   if (scene === "homeScreen") {
     homeScreen();
   }
@@ -97,13 +98,6 @@ async function draw() {
   }
 }
 
-
-
-
-function mousePressed() {
-
-
-}
 
 function keyPressed() {
   if (scene === "bikeGame") {
@@ -137,7 +131,7 @@ function homeScreen() {
   noStroke();
   fill(12, 205, 210);
   rect(262,552,88,20);
-  //image(startImg, 50, 200, 300 ,90);
+  image(startImg, 50, 200, 300 ,90);
   if (mouseIsPressed === true && mouseX > 50 && mouseX < 350 && mouseY > 200 && mouseY < 300) {
     scene = "bikeGame";
   }
@@ -172,23 +166,26 @@ function displayBike() {
 
 //bikeGame
 function spawnBushes() {
-  let someBush = {
-    x: width/2,
-    y: 0,
-    speed: 7,
-    radius: 40,
-    choice: int(random(3)),
-  };
-  if (someBush.choice === 0) {
-    someBush.x -= width/3;
+  if (scene === "bikeGame") {
+
+    let someBush = {
+      x: width/2,
+      y: 0,
+      speed: 7,
+      radius: 40,
+      choice: int(random(3)),
+    };
+    if (someBush.choice === 0) {
+      someBush.x -= width/3;
+    }
+    else if (someBush.choice === 1) {
+      someBush.x += width/3;
+    }
+    else if (someBush.choice === 2) {
+      someBush.x = width/2;
+    }
+    theBushes.push(someBush);
   }
-  else if (someBush.choice === 1) {
-    someBush.x += width/3;
-  }
-  else if (someBush.choice === 2) {
-    someBush.x = width/2;
-  }
-  theBushes.push(someBush);
 }
 
 //bikeGame
