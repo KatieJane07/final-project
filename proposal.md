@@ -48,3 +48,9 @@ left right straight back
 
 intersection 1,2,3,4,etcetc
 if left -> int 4 if int 4 and right etc etc
+
+colours 
+red - #c91412
+Orange - #f58800
+Yellow- #f8bc24
+Blue - #0CCDD2 

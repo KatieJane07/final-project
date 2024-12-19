@@ -20,8 +20,6 @@ let scene = "homeScreen";
 
 //images
 let startImg;
-let leftImg;
-let rightImg;
 let arrows;
 let bikeBgImg;
 let bikerImg;
@@ -53,8 +51,6 @@ let biker = {
 
 function preload() {
   //startImg = loadImage("start.png");
-  leftImg = loadImage("leftArrow.png");
-  rightImg=loadImage("rightArrow.png");
   arrows = loadImage("arrows.gif");
   //bike game
   bikeBgImg = loadImage("bikeBackground.jpg");
@@ -118,7 +114,7 @@ function keyPressed() {
 }
 
 function homeScreen() {
-  background(142,242,111);
+  background(12, 205, 210);
   //title
   rect(50,50,300,100);
   rect(50,180,300,100);
@@ -128,6 +124,7 @@ function homeScreen() {
   //rect(50,400,300,175);
   image(arrows, 50, 400);
   noStroke();
+  fill(12, 205, 210);
   rect(262,552,83,20)
   //image(startImg, 50, 200, 300 ,90);
   if (mouseIsPressed === true && mouseX > 50 && mouseX < 350 && mouseY > 200 && mouseY < 300) {
