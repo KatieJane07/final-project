@@ -13,7 +13,7 @@ let scene = "homeScreen";
 // crash
 // - Cat
 // - Outside
-// - mazeGame (stolen code !)
+// - mazeGame 
 // - House
 // - Witch
 // iSpy
@@ -27,7 +27,7 @@ let bikeBgImg;
 let bikerImg;
 let bushImg;
 let crashImg;
-//let bushTextureImg;
+
 
 //bike game
 let theBushes = [];
@@ -39,17 +39,12 @@ let biker = {
 };
 
 //iSpy
+let grid;
+let cellSize;
+let iSpyLives = 3;
+let newGrid;
+const GRID_SIZE = 15;
 
-//mazeGame
-// var z,x,y;
-// var wallArray=[];
-// var lastGoodX = 0;
-// var lastGoodY = 0;
-// var lastGoodZ = 0;
-// var camAngle;
-// let bCam;
-// var dx,dz;
-// let graphics, graphics2;
 
 function preload() {
   startImg = loadImage("start.png");
@@ -70,35 +65,43 @@ function preload() {
   //finditem4
 
   //mazeGame
-  //bushTextureImg = loadImage("bush-texture");
-}
-function setup() {
-  createCanvas(width, height);
-  spawnBushes();
-  window.setInterval(spawnBushes,650);
+  
 }
 
+function setup() {
+  createCanvas(width, height);
+  //bush game
+  spawnBushes();
+  window.setInterval(spawnBushes,650);
+
+  //iSpy Game
+  cellSize = height / GRID_SIZE;
+  grid = iSpyGrid(GRID_SIZE, GRID_SIZE);
+}
+
+//
 function draw() {
-  // setTimeout(spawnBushes, 500);
   if (scene === "homeScreen") {
     homeScreen();
   }
+
   if (scene === "bikeGame") {
     bikeGame();
-
   }
+
   if (scene === "crash") {
     background(crashImg);
     if (keyIsPressed && keyCode === 32) {
       scene = "iSpy"; //cutscene actually
     }
   }
+
   if (scene === "iSpy") {
     iSpyGame();
   }
 }
 
-
+//
 function keyPressed() {
   if (scene === "bikeGame") {
     if (keyCode === LEFT_ARROW) {
@@ -114,6 +117,7 @@ function keyPressed() {
   }
 }
 
+//HomeScreen
 function homeScreen() {
   background(12, 205, 210);
   //title
@@ -137,19 +141,13 @@ function homeScreen() {
   }
 }
 
+//bikeGame
 function bikeGame() {
   moveBushes();
   displayBike();
   displayBushes();
   bikeGameRules();
 }
-
-function iSpyGame() {
-  cursor("cursor.png");
-  displayiSpy();
-  placeItems();
-}
-
 
 //bikeGame
 function displayBike() {
@@ -227,274 +225,98 @@ function moveBushes() {
 }
 
 //iSpy Game
-function displayiSpy() {
-  //background(iSpyBgImg)
-  background(220);
-  text("hiii" ,width/2,height/2);
-
+function iSpyGame() {
+  //cursor tb moved
+  cursor("cursor.png");
+  displayiSpy();
 }
 
 //iSpy Game
-function placeItems() {
-  //randomly place 4 items to find based on a grid system
+function displayiSpy() {
+  //background(iSpyBgImg)
+  showItems();
+  fill("white");
+  text(iSpyLives, 50,50);
 }
 
-//ispy code stuf
-// let grid;
-// let cellSize;
-// const GRID_SIZE = 15;
+//iSpy Game
+function iSpyGrid(cols, rows) {
+  newGrid = Array.from({ length: rows }, () => Array(cols).fill(0));
 
-// function setup() {
-// createCanvas(400,600);
-//   cellSize = height/GRID_SIZE;
+  // Place four random squares with unique colors
+  for (let color = 1; color <= 8; color++) {
+    let x, y;
+    do {
+      x = Math.floor(random(cols));
+      y = Math.floor(random(rows));
+      if (newGrid[y][x] !== 0) {
+        newGrid[y][x] = color;
+      }
+    } while (newGrid[y][x] !== 0); // Ensure the spot is empty
+    newGrid[y][x] = color;
+  }
 
-//   grid = generateRandomGrid(GRID_SIZE, GRID_SIZE);
-// }
+  return newGrid;
+}
 
-// function windowResized() {
-//   if ( windowWidth < windowHeight) {
-//     resizeCanvas(windowWidth, windowWidth);
-//   }
-//   else {
-//     resizeCanvas(windowHeight, windowHeight);
-//   }
-//   cellSize = height/GRID_SIZE;
-// }
+//iSpy Game
+function showItems() {
+  for (let y = 0; y < GRID_SIZE; y++) {
+    for (let x = 0; x < GRID_SIZE; x++) {
+      if (grid[y][x] === 1) {
+        fill("green");
+      } 
+      else if (grid[y][x] === 2) {
+        fill("red");
+      } 
+      else if (grid[y][x] === 3) {
+        fill("blue");
+      } 
+      else if (grid[y][x] === 4) {
+        fill("pink");
+      } 
+      else if (grid[y][x] === 5) {
+        fill("slateblue");
+      } 
+      else if (grid[y][x] === 6) {
+        fill("rebeccapurple");
+      } 
+      else if (grid[y][x] === 7) {
+        fill("aliceblue");
+      } 
+      else if (grid[y][x] === 8) {
+        fill("lime");
+      } 
+      else {
+        fill(0, 0, 0, 0); // Transparent for empty cells
+      }
+      noStroke();
+      square(x * cellSize, y * cellSize, cellSize);
+    }
+  }
+}
 
-// function draw() {
-//   background(12,23,53);
-//   displayGrid();
+//
+function mousePressed() {
+  if (scene === "iSpy") {
+    let x = Math.floor(mouseX/cellSize);
+    let y = Math.floor(mouseY/cellSize);
+    
+    toggleCell(x,y);
+  }
+}
 
-// }
-
-// function mousePressed() {
-// }
-
-
-// function displayGrid() {
-//   for (let y = 0; y < GRID_SIZE; y++) {
-//     for (let x = 0; x < GRID_SIZE; x++) {
-//       if (grid[y][x] === 1) {
-//         //image 1
-//         fill("green");
-//       }
-//       else if (grid[y][x] === 2) {
-//         //image 2
-//         fill("red");
-//       }
-//       else if (grid[y][x] === 3) {
-//         //image 3
-//         fill("blue");
-//       }
-//       else if (grid[y][x] === 4) {
-//         //image 4
-//         fill("pink");
-//       }
-//       else if (grid[y][x] === 0) {
-//         fill(0, 0, 0, 0);
-//       }
-//       noStroke();
-//       square(x * cellSize , y * cellSize , cellSize);
-//     }
-//   }
-// }
-
-// function generateRandomGrid(cols, rows){
-//   let newGrid = [];
-//   for (let y = 0; y < rows; y++) {
-//     newGrid.push([]);
-//     for (let x = 0; x < cols; x++) {
-//       //make 4 coloured squares
-//       let x1 = Math.floor(random(width)/cellSize);
-//       let y1 = Math.floor(random(height)/cellSize);
-//       let x2 = Math.floor(random(width)/cellSize);
-//       let y2 = Math.floor(random(height)/cellSize);
-//       let x3 = Math.floor(random(width)/cellSize);
-//       let y3 = Math.floor(random(height)/cellSize);
-//       let x4 = Math.floor(random(width)/cellSize);
-//       let y4 = Math.floor(random(height)/cellSize);
-//       //pick a random number between 0 and width, 0 and height
-//       // place square there
-//       // if 1 x and 1 y === 2x and 2y then redraw or smth
-//       //let x = Math.floor(x1/cellSize);
-//       //let y = Math.floor(y1/cellSize);
-//     if (x1 >= 0 && x1 < GRID_SIZE && y1 >=0 && y1 < GRID_SIZE) {
-//       grid[y][x] = 1;
-//     }
-//        if (x2 >= 0 && x2 < GRID_SIZE && y2 >=0 && y2 < GRID_SIZE) {
-//       grid[y][x] = 2;
-//     }
-//        if (x3 >= 0 && x3 < GRID_SIZE && y3 >=0 && y3 < GRID_SIZE) {
-//       grid[y][x] = 3;
-//     }
-//        if (x4 >= 0 && x4 < GRID_SIZE && y4 >=0 && y4 < GRID_SIZE) {
-//       grid[y][x] = 4;
-//     }
-//     }
-//   }
-//   return newGrid;
-
-// }
+//iSpy Game
+function toggleCell(x,y) {
+  if (x >= 0 && x < GRID_SIZE && y >=0 && y < GRID_SIZE) {
+    if (newGrid[y][x] === 0) {
+      iSpyLives -= 1;
+    }
+    else {
+      newGrid[y][x] = 0;
+    }
+  }
+}
 
 
-//MZE CODE
-// //Luca Del Priore MMP 310
-// //simple 3D maze game
-
-
-// function setup() {
-//   createCanvas(windowWidth, windowHeight,WEBGL);
-//   y=0;
-//   x=0;
-//   z=0;
-//   //sign graphics
-// graphics = createGraphics(800,400);
-//   graphics2 = createGraphics(420,400);
-
-// //bcam is a birds eye view that helps when placing blocks  
-//   bCam = createCamera();
-//     bCam.setPosition(0,-3000,200);
-// //cam is the player camera
-//    cam = createCamera();
-//   cam.setPosition(-400,0,800);
-  
-  
-//   //maze creation
-//   //wallArray.push(new wall(0,0,0));
-//   wallArray.push(new wall(400,0,400));
-//   wallArray.push(new wall(400,0,800));
-//   wallArray.push(new wall(0,0,1200));
-//   wallArray.push(new wall(-400,0,1200));
-//   wallArray.push(new wall(-400,0,0));
-//   wallArray.push(new wall(0,0,-400));
-//   wallArray.push(new wall(800,0,0));
-//   wallArray.push(new wall(800,0,-400));
-//   wallArray.push(new wall(800,0,-800));
-//   wallArray.push(new wall(400,0,-1200));
-//   wallArray.push(new wall(400,0,-1600))
-//   for(let i=0;i<3;i++){
-//     wallArray.push(new wall(400-400*i,0,-1200));
-//     wallArray.push(new wall(-800,0,800-400*i));
-//     wallArray.push(new wall(-800,0,400-400*i))
-//     wallArray.push(new wall(-1200,0,-800-400*i));
-//     wallArray.push(new wall(-800+400*i,0,-2000));
-//   }
-
-// }
-
-// function draw() {
-//  background("blue");
-  
-//   //start sign creating a sign for the game start
-//   push();
-//   noStroke();
-//   translate(-400,0,550);
-//   texture(graphics);
-//   graphics.background(84, 80, 72);
-//   graphics.fill(5);
-//   graphics.textAlign(CENTER);
-//   graphics.textSize(50); 
-//   graphics.text('Use "wasd" to',400,150);
-//   graphics.text('walk and',420,200);
-//   graphics.text('left and right arrow to look',420,250);
-//   graphics.text('Find the Gem',420,380);
-//   plane(200,100);
-//   pop();
-  
-//   //creating a sign for the game end
-//   push();
-//   noStroke();
-//   translate(0,0,-1600);
-//   rotateY(-PI/2);
-//   texture(graphics2);
-//   graphics2.background(84, 80, 72);
-//   graphics2.textAlign(CENTER);
-//   graphics2.textSize(50); 
-//   graphics2.text('You found the gem',200,50);
-//   plane(220,200);
-//   pop();
-
-//  //maze building camera
-//    bCam.lookAt(0,0,0);
-//    //setCamera(bCam);
-  
- 
-// frameRate(60);
-//     x =0;
-//     z =0;
-//   camAngle=0;
-//   //player "flash light"
-//   pointLight(200, 200, 200, cam.eyeX, -200, cam.eyeZ);
-//   ambientLight(5);
-  
-//   //creating the gem
-//   push();
-//   noStroke();
-//   translate(0,0,-1600);
-//   specularMaterial(0, 255, 187);
-//   shininess(1000);
-//   rotateY(millis()/500);
-//   rotateX(millis()/523);
-//   sphere(50,16 ,3);
-//   pop();
- 
-
-//   var anyTouching = false;
-//   //displays all blocks in an array
-//  for (let i=0; i<wallArray.length; i++){
-//    wallArray[i].display();
-//    //tests if the wall class is touching the camera
-//    if(wallArray[i].touching()){
-//          anyTouching=true;
-//    }
-//  }
-//   //saves the last "safe" player location to return the player to.
-//   if(anyTouching==false){
-
-//     lastGoodX=(cam.eyeX);
-//     lastGoodY = cam.eyeY;
-//     lastGoodZ=(cam.eyeZ);
-//       //console.log(lastGoodX+" "+lastGoodZ);
-//   }
-  
-
-// //wasd controls for strafing
-//     if(keyIsDown(83)){
-//      z=10;      
-//      }
-  
-//    if(keyIsDown(87)){
-//      z=-10;              
-//     }
-  
-//    if(keyIsDown(65)){
-//      x=-10;                           
-//    }
-  
-//    if(keyIsDown(68)){
-//      x=10;                             
-//     }
-
-//  //puts player back to last place not touching a wall 
-// if(anyTouching==true){
-//       cam.setPosition(lastGoodX,lastGoodY,lastGoodZ);
-//       //console.log("touching");
-      
-//       //set to last safe position
-
-//     }
-// //looking side to side controls  
-//     if(keyIsDown(37)){
-//      camAngle=0.05;                             
-//     }
-//      if(keyIsDown(39)){
-//      camAngle=-0.05;                             
-//     }
-//   //mouse would often leave the player stuck
-//     //cam.pan(movedX*-0.01);
-//     cam.pan(camAngle);
-//   //cam.tilt(movedY*0.01);
-//     cam.move(x,0,z);
-//  // console.log(cam.eyeZ);
-// }
 

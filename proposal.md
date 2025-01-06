@@ -23,10 +23,9 @@ The story will then lead the player through the process of becoming human again.
 - Cat
 - Outside
 - maze mini game
-- House
-- Witch
-- ispy mini game
-- Bike
+- Witch OR Alt Ending
+- ispy mini game Or End
+- Bike Or Bike
 
 ## to do
 - images for find it items
