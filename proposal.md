@@ -28,17 +28,22 @@ The story will then lead the player through the process of becoming human again.
 - Bike Or Bike
 
 ## to do
-- images for find it items
-- figure out cutscene videos
+- cutscene 1
+- either or section
+- cutscene 2
 - background for ispy game
-- how to play popup
+- images for find it items (7)
+- cutscene 3
+- the end page
+
 
 title - 300x100
 start - 300x100
 rules - 300x75
 video - 300x175
+ispy - 40x40
+backgrounds - 400x600
 
-400x600
 wa woah why am i? who am i? WHAT!?  *zoom out* meow meow meow meow meow aww silly kitty *zoom in* what? what do i do now?
 
 go outside

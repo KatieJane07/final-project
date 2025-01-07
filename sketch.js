@@ -8,7 +8,7 @@
 //canvas and display
 let width = 400;
 let height = 600;
-let scene = "homeScreen";
+let scene = "crash";
 // bikeGame
 // crash
 // - Cat
@@ -74,7 +74,7 @@ function setup() {
   spawnBushes();
   window.setInterval(spawnBushes,650);
 
-  //iSpy Game
+  //iSpy game grid set up
   cellSize = height / GRID_SIZE;
   grid = iSpyGrid(GRID_SIZE, GRID_SIZE);
 }
@@ -90,10 +90,7 @@ function draw() {
   }
 
   if (scene === "crash") {
-    background(crashImg);
-    if (keyIsPressed && keyCode === 32) {
-      scene = "iSpy"; //cutscene actually
-    }
+    crashScene();
   }
 
   if (scene === "iSpy") {
@@ -104,6 +101,7 @@ function draw() {
 //
 function keyPressed() {
   if (scene === "bikeGame") {
+    //biker movement
     if (keyCode === LEFT_ARROW) {
       if (biker.x - width / 3 > 0) {
         biker.x -= width / 3;
@@ -133,9 +131,11 @@ function homeScreen() {
   //rect(50,400,300,175);
   image(arrows, 50, 400);
   noStroke();
+
   fill(12, 205, 210);
   rect(262,552,88,20);
   image(startImg, 50, 200, 300 ,90);
+  //start button clicked
   if (mouseIsPressed === true && mouseX > 50 && mouseX < 350 && mouseY > 200 && mouseY < 300) {
     scene = "bikeGame";
   }
@@ -151,12 +151,13 @@ function bikeGame() {
 
 //bikeGame
 function displayBike() {
+  //place bg
   background(bikeBgImg);
+  //place biker
   imageMode(CENTER);
   image(bikerImg, biker.x, biker.y, 100, 100);
   imageMode(CORNER);
-  // fill("pink");
-  // circle(biker.x, biker.y, biker.radius);
+  //place lane lines
   line(width / 3, height, width / 3, 0);
   line(width / 3 * 2, height, width / 3 * 2, 0);
     
@@ -165,7 +166,6 @@ function displayBike() {
 //bikeGame
 function spawnBushes() {
   if (scene === "bikeGame") {
-
     let someBush = {
       x: width/2,
       y: 0,
@@ -192,13 +192,12 @@ function displayBushes() {
     imageMode(CENTER);
     image(bushImg, bush.x, bush.y, 130, 130);
     imageMode(CORNER);
-    // fill("green");
-    // circle(bush.x, bush.y, bush.radius * 2);
   }
 }
 
 //bikeGame
 function bikeGameRules() {
+  //biker and bush collision
   for (let bush of theBushes) {
     let distanceAway = dist(biker.x, biker.y, bush.x, bush.y);
     if (distanceAway < bush.radius) {
@@ -208,12 +207,8 @@ function bikeGameRules() {
       collide = false;
     }
     if (collide === true) {
-      text("end game", width / 2, height / 2);
-      //you crashed image
       scene = "crash";
-      //scene = "iSpy";
     }
-
   }
 }
 
@@ -224,26 +219,38 @@ function moveBushes() {
   }
 }
 
-//iSpy Game
-function iSpyGame() {
-  //cursor tb moved
-  cursor("cursor.png");
-  displayiSpy();
+function crashScene() {
+  background(crashImg);
+  fill("green");
+  textSize(20);
+  text("press space to continue", 175, 570);
+  if (keyIsPressed && keyCode === 32) {
+    scene = "iSpy"; //cutscene actually
+  }
 }
 
 //iSpy Game
-function displayiSpy() {
+function iSpyGame() {
+  //cursor tb moved 
+  cursor("cursor.png");
   //background(iSpyBgImg)
+  background(30,20,10);
   showItems();
-  fill("white");
+  fill("blue");
   text(iSpyLives, 50,50);
+  if (iSpyLives === 0) {
+    //you died
+    //press space to continue
+    //go to after cutscene1 (maze game?)
+  }
+
 }
 
 //iSpy Game
 function iSpyGrid(cols, rows) {
   newGrid = Array.from({ length: rows }, () => Array(cols).fill(0));
 
-  // Place four random squares with unique colors
+  // places random items randomly
   for (let color = 1; color <= 8; color++) {
     let x, y;
     do {
@@ -252,7 +259,9 @@ function iSpyGrid(cols, rows) {
       if (newGrid[y][x] !== 0) {
         newGrid[y][x] = color;
       }
-    } while (newGrid[y][x] !== 0); // Ensure the spot is empty
+    } 
+    //checks if spot is empty before placing
+    while (newGrid[y][x] !== 0); 
     newGrid[y][x] = color;
   }
 
@@ -261,6 +270,7 @@ function iSpyGrid(cols, rows) {
 
 //iSpy Game
 function showItems() {
+  //places items randomly
   for (let y = 0; y < GRID_SIZE; y++) {
     for (let x = 0; x < GRID_SIZE; x++) {
       if (grid[y][x] === 1) {
@@ -288,7 +298,8 @@ function showItems() {
         fill("lime");
       } 
       else {
-        fill(0, 0, 0, 0); // Transparent for empty cells
+        // fill empty squares w transparent blocks
+        fill(0, 0, 0, 0); 
       }
       noStroke();
       square(x * cellSize, y * cellSize, cellSize);
@@ -313,10 +324,18 @@ function toggleCell(x,y) {
       iSpyLives -= 1;
     }
     else {
+      //"collects" found items
       newGrid[y][x] = 0;
     }
   }
 }
 
+function checkEmpty() {
+  //for row of array for col of array if not 0 return false else return true
+  //if checkEmpty = true cutscene 3 -> end game
+  //if lives = 0 go back to right after cutscene 1
+  //for ()
+
+}
 
 
