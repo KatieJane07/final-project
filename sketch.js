@@ -8,7 +8,7 @@
 //canvas and display
 let width = 400;
 let height = 600;
-let scene = "homeScreen";
+let scene = "crash";
 // "homeScreen"
 // "bikeGame"
 // "crash"
@@ -104,6 +104,8 @@ function draw() {
   if (scene === "iSpy") {
     iSpyGame();
   }
+
+  if (scene !== "homeScreen" || scene !== "bikeGame");
 }
 
 //
@@ -124,7 +126,7 @@ function keyPressed() {
 }
 
 //
-function mousePressed() {
+function mouseReleased() {
   if (scene === "iSpy") {
     let x = Math.floor(mouseX/cellSize);
     let y = Math.floor(mouseY/cellSize);
@@ -143,7 +145,7 @@ function mousePressed() {
   }
 
   //fix!! mouse clicked through the scene
-  if (scene === "choicesTwo") {
+  else if (scene === "choicesTwo") {
     if (mouseY > 300) {
       scene = "iSpy";
       //scene = "witchCutScene"; **
