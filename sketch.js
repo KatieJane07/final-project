@@ -8,15 +8,15 @@
 //canvas and display
 let width = 400;
 let height = 600;
-let scene = "crash";
-// bikeGame
-// crash
-// - Cat
-// - Outside
-// - mazeGame 
-// - House
-// - Witch
-// iSpy
+let scene = "homeScreen";
+// "homeScreen"
+// "bikeGame"
+// "crash"
+// "houseCutScene"
+// "choicesOne"
+// "choicesTwo" 
+// "witchCutScene"
+// "iSpy"
 
 //images
 let startImg;
@@ -93,6 +93,14 @@ function draw() {
     crashScene();
   }
 
+  if (scene === "choicesOne") {
+    choiceOne();
+  }
+
+  if (scene === "choicesTwo") {
+    choiceTwo();
+  }
+
   if (scene === "iSpy") {
     iSpyGame();
   }
@@ -111,6 +119,38 @@ function keyPressed() {
       if (biker.x + width / 3 < width) {
         biker.x += width / 3;
       }
+    }
+  }
+}
+
+//
+function mousePressed() {
+  if (scene === "iSpy") {
+    let x = Math.floor(mouseX/cellSize);
+    let y = Math.floor(mouseY/cellSize);
+    
+    toggleCell(x,y);
+  }
+
+  if (scene === "choicesOne") {
+    if (mouseX < 200) {
+      scene = "choicesTwo";
+    }
+    else {
+      scene = "iSpy";
+      //scene = "witchCutScene"; **
+    }
+  }
+
+  //fix!! mouse clicked through the scene
+  if (scene === "choicesTwo") {
+    if (mouseY > 300) {
+      scene = "iSpy";
+      //scene = "witchCutScene"; **
+    }
+    else {
+      scene = "homeScreen";
+      // the end **
     }
   }
 }
@@ -219,21 +259,46 @@ function moveBushes() {
   }
 }
 
+//crash
 function crashScene() {
   background(crashImg);
   fill("green");
   textSize(20);
   text("press space to continue", 175, 570);
   if (keyIsPressed && keyCode === 32) {
-    scene = "iSpy"; //cutscene actually
+    scene = "choicesOne";
+    //scene = "houseCutScene"; **
   }
+}
+
+//choices
+function choiceOne() {
+  // !! **
+  background("green")
+  fill("white");
+  stroke(5);
+  text('where should I go now?', 150, 80);
+  line(200,0,200,600);
+  text('left', 50,400);
+  text('right', 350,400);
+}
+
+function choiceTwo() {
+  // !! **
+  background("pink")
+  fill("white");
+  stroke(5);
+  text('where should I go now?', 150, 80);
+  line(0,300,400,300);
+  text('left', 50,400);
+  text('right', 350,400);
 }
 
 //iSpy Game
 function iSpyGame() {
   //cursor tb moved 
   cursor("cursor.png");
-  //background(iSpyBgImg)
+  //background(iSpyBgImg) !!
   background(30,20,10);
   showItems();
   fill("blue");
@@ -241,7 +306,7 @@ function iSpyGame() {
   if (iSpyLives === 0) {
     //you died
     //press space to continue
-    //go to after cutscene1 (maze game?)
+    //go to after cutscene1 (maze game?) !! **
   }
 
 }
@@ -249,7 +314,7 @@ function iSpyGame() {
 //iSpy Game
 function iSpyGrid(cols, rows) {
   newGrid = Array.from({ length: rows }, () => Array(cols).fill(0));
-
+  
   // places random items randomly
   for (let color = 1; color <= 8; color++) {
     let x, y;
@@ -271,6 +336,7 @@ function iSpyGrid(cols, rows) {
 //iSpy Game
 function showItems() {
   //places items randomly
+  // texture!!
   for (let y = 0; y < GRID_SIZE; y++) {
     for (let x = 0; x < GRID_SIZE; x++) {
       if (grid[y][x] === 1) {
@@ -307,35 +373,38 @@ function showItems() {
   }
 }
 
-//
-function mousePressed() {
-  if (scene === "iSpy") {
-    let x = Math.floor(mouseX/cellSize);
-    let y = Math.floor(mouseY/cellSize);
-    
-    toggleCell(x,y);
-  }
-}
-
 //iSpy Game
 function toggleCell(x,y) {
   if (x >= 0 && x < GRID_SIZE && y >=0 && y < GRID_SIZE) {
     if (newGrid[y][x] === 0) {
       iSpyLives -= 1;
+      if (iSpyLives === 0) {
+        background('pink');
+      }
     }
     else {
       //"collects" found items
       newGrid[y][x] = 0;
+      checkEmpty();
+
+      //fix!! **
+      if (checkEmpty()) {
+        background('blue');
+      }
     }
   }
 }
 
 function checkEmpty() {
-  //for row of array for col of array if not 0 return false else return true
-  //if checkEmpty = true cutscene 3 -> end game
-  //if lives = 0 go back to right after cutscene 1
-  //for ()
-
+// checks if each tile is empty !!
+  for (let y = 0; y < 15; y++) {
+    for (let x = 0; x < 15; x++) {
+      if (newGrid[y][x] !== 0) {
+        return false;
+      }
+    }
+  }
+  return true;
 }
 
 
