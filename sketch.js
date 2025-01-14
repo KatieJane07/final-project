@@ -8,7 +8,7 @@
 //canvas and display
 let width = 400;
 let height = 600;
-let scene = "crash";
+let scene = "iSpy";
 // "homeScreen"
 // "bikeGame"
 // "crash"
@@ -28,6 +28,8 @@ let bikerImg;
 let bushImg;
 let crashImg;
 
+//videos
+let houseCutScene;
 
 //bike game
 let theBushes = [];
@@ -43,10 +45,11 @@ let grid;
 let cellSize;
 let iSpyLives = 3;
 let newGrid;
-const GRID_SIZE = 15;
+const GRID_SIZE = 10;
 
 
 function preload() {
+  //other
   startImg = loadImage("start.png");
   titleImg = loadImage("bikeGameTitle.jpg");
   rulesImg = loadImage("bikeGameRules.jpg");
@@ -56,16 +59,18 @@ function preload() {
   bikerImg = loadImage("biker.png");
   bushImg = loadImage("bush.png");
   crashImg = loadImage("crash.jpg");
-
   //ispy
   //ispy bg
   //finditem1
   //finditem2
   //finditem3
   //finditem4
-
   //mazeGame
-  
+  //backgroundone
+  //backgroundtwo
+  //cutscenes
+  //houseCutScene = createVideo("catVid.mov");
+
 }
 
 function setup() {
@@ -75,8 +80,8 @@ function setup() {
   window.setInterval(spawnBushes,650);
 
   //iSpy game grid set up
-  cellSize = height / GRID_SIZE;
-  grid = iSpyGrid(GRID_SIZE, GRID_SIZE);
+  cellSize = height / 10;
+  grid = iSpyGrid(10, 15);
 }
 
 //
@@ -103,6 +108,10 @@ function draw() {
 
   if (scene === "iSpy") {
     iSpyGame();
+  }
+
+  if (scene === "houseCutScene") {
+    //image(catVid, 0, 0, 400, 600); 
   }
 
   if (scene !== "homeScreen" || scene !== "bikeGame");
@@ -155,7 +164,7 @@ function mouseReleased() {
       // the end **
     }
   }
-}
+}  
 
 //HomeScreen
 function homeScreen() {
@@ -268,8 +277,8 @@ function crashScene() {
   textSize(20);
   text("press space to continue", 175, 570);
   if (keyIsPressed && keyCode === 32) {
-    scene = "choicesOne";
-    //scene = "houseCutScene"; **
+    // scene = "choicesOne";
+    scene = "houseCutScene";
   }
 }
 
@@ -369,6 +378,7 @@ function showItems() {
         // fill empty squares w transparent blocks
         fill(0, 0, 0, 0); 
       }
+      console.log(newGrid);
       noStroke();
       square(x * cellSize, y * cellSize, cellSize);
     }
@@ -391,6 +401,7 @@ function toggleCell(x,y) {
 
       //fix!! **
       if (checkEmpty()) {
+        console.log("ahh");
         background('blue');
       }
     }
@@ -398,6 +409,7 @@ function toggleCell(x,y) {
 }
 
 function checkEmpty() {
+  console.log("check")
 // checks if each tile is empty !!
   for (let y = 0; y < 15; y++) {
     for (let x = 0; x < 15; x++) {
