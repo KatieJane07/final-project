@@ -45,7 +45,7 @@ let grid;
 let cellSize;
 let iSpyLives = 3;
 let newGrid;
-const GRID_SIZE = 10;
+const GRID_SIZE = 15;
 
 
 function preload() {
@@ -80,7 +80,7 @@ function setup() {
   window.setInterval(spawnBushes,650);
 
   //iSpy game grid set up
-  cellSize = height / 10;
+  cellSize = width/15;
   grid = iSpyGrid(10, 15);
 }
 
@@ -378,7 +378,7 @@ function showItems() {
         // fill empty squares w transparent blocks
         fill(0, 0, 0, 0); 
       }
-      console.log(newGrid);
+
       noStroke();
       square(x * cellSize, y * cellSize, cellSize);
     }
@@ -399,21 +399,18 @@ function toggleCell(x,y) {
       newGrid[y][x] = 0;
       checkEmpty();
 
-      //fix!! **
-      if (checkEmpty()) {
-        console.log("ahh");
-        background('blue');
-      }
     }
+  }
+  if (checkEmpty()) {
+    background('blue');
   }
 }
 
 function checkEmpty() {
-  console.log("check")
 // checks if each tile is empty !!
-  for (let y = 0; y < 15; y++) {
-    for (let x = 0; x < 15; x++) {
-      if (newGrid[y][x] !== 0) {
+  for (let y = 0; y < GRID_SIZE; y++) {
+    for (let x = 0; x < GRID_SIZE; x++) {
+      if (newGrid[y][x] > 0) {
         return false;
       }
     }
