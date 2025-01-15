@@ -8,7 +8,7 @@
 //canvas and display
 let width = 400;
 let height = 600;
-let scene = "iSpy";
+let scene = "homeScreen";
 // "homeScreen"
 // "bikeGame"
 // "crash"
@@ -69,8 +69,7 @@ function preload() {
   //backgroundone
   //backgroundtwo
   //cutscenes
-  //houseCutScene = createVideo("catVid.mov");
-
+  // houseCutScene = createVideo("catVid.mov"); // ??
 }
 
 function setup() {
@@ -86,6 +85,7 @@ function setup() {
 
 //
 function draw() {
+  // houseCutScene.hide(); // ??
   if (scene === "homeScreen") {
     homeScreen();
   }
@@ -111,10 +111,14 @@ function draw() {
   }
 
   if (scene === "houseCutScene") {
-    //image(catVid, 0, 0, 400, 600); 
+    //??
+    // image(houseCutScene, 0, 0, 400, 600); 
+    // houseCutScene.loop();
   }
 
-  if (scene !== "homeScreen" || scene !== "bikeGame");
+  if (scene !== "homeScreen" && scene !== "bikeGame") {
+    cursor("cursor.png");
+  }
 }
 
 //
@@ -307,8 +311,6 @@ function choiceTwo() {
 
 //iSpy Game
 function iSpyGame() {
-  //cursor tb moved 
-  cursor("cursor.png");
   //background(iSpyBgImg) !!
   background(30,20,10);
   showItems();
@@ -402,7 +404,7 @@ function toggleCell(x,y) {
     }
   }
   if (checkEmpty()) {
-    background('blue');
+    scene = "homeScreen";
   }
 }
 
