@@ -29,7 +29,8 @@ let bushImg;
 let crashImg;
 
 //videos
-let houseCutScene;
+let videoOne;
+let onePlay = false;
 
 //bike game
 let theBushes = [];
@@ -81,6 +82,10 @@ function setup() {
   //iSpy game grid set up
   cellSize = width/15;
   grid = iSpyGrid(10, 15);
+
+  //cutscenes
+  videoOne = createVideo("catLove.mov")
+  videoOne.hideControls();
 }
 
 //
@@ -96,6 +101,7 @@ function draw() {
 
   if (scene === "crash") {
     crashScene();
+    image(videoOne, 0, 0, 400, 600);
   }
 
   if (scene === "choicesOne") {
@@ -108,12 +114,6 @@ function draw() {
 
   if (scene === "iSpy") {
     iSpyGame();
-  }
-
-  if (scene === "houseCutScene") {
-    //??
-    // image(houseCutScene, 0, 0, 400, 600); 
-    // houseCutScene.loop();
   }
 
   if (scene !== "homeScreen" && scene !== "bikeGame") {
@@ -140,6 +140,10 @@ function keyPressed() {
 
 //
 function mouseReleased() {
+  if (scene === "crash") {
+    videoOne.loop();
+  }
+  
   if (scene === "iSpy") {
     let x = Math.floor(mouseX/cellSize);
     let y = Math.floor(mouseY/cellSize);
@@ -279,11 +283,8 @@ function crashScene() {
   background(crashImg);
   fill("green");
   textSize(20);
-  text("press space to continue", 175, 570);
-  if (keyIsPressed && keyCode === 32) {
-    // scene = "choicesOne";
-    scene = "houseCutScene";
-  }
+  text("click anywhere to continue", 175, 570);
+
 }
 
 //choices
