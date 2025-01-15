@@ -41,17 +41,8 @@ title - 300x100
 start - 300x100
 rules - 300x75
 video - 300x175
-ispy - 40x40
+ispy - 
 backgrounds - 400x600
-
-wa woah why am i? who am i? WHAT!?  *zoom out* meow meow meow meow meow aww silly kitty *zoom in* what? what do i do now?
-
-go outside
-left or right
-left right straight back
-
-intersection 1,2,3,4,etcetc
-if left -> int 4 if int 4 and right etc etc
 
 colours 
 red - #c91412
