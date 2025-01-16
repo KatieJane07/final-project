@@ -85,7 +85,7 @@ function setup() {
 
   //cutscenes
   videoOne = createVideo("catLove.mov")
-  videoOne.hideControls();
+  videoOne.hide();
 }
 
 //
@@ -143,7 +143,7 @@ function mouseReleased() {
   if (scene === "crash") {
     videoOne.loop();
   }
-  
+
   if (scene === "iSpy") {
     let x = Math.floor(mouseX/cellSize);
     let y = Math.floor(mouseY/cellSize);
