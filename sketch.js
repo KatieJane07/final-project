@@ -8,7 +8,7 @@
 //canvas and display
 let width = 400;
 let height = 600;
-let scene = "homeScreen";
+let scene = "bikeGame";
 // "homeScreen"
 // "bikeGame"
 // "crash"
@@ -69,8 +69,10 @@ function preload() {
   //mazeGame
   //backgroundone
   //backgroundtwo
+  
   //cutscenes
-  // houseCutScene = createVideo("catVid.mov"); // ??
+  videoOne = createVideo("catLove.mov")
+  videoOne.hide();
 }
 
 function setup() {
@@ -82,10 +84,6 @@ function setup() {
   //iSpy game grid set up
   cellSize = width/15;
   grid = iSpyGrid(10, 15);
-
-  //cutscenes
-  videoOne = createVideo("catLove.mov")
-  videoOne.hide();
 }
 
 //
@@ -139,9 +137,10 @@ function keyPressed() {
 }
 
 //
-function mouseReleased() {
+function mousePressed() {
   if (scene === "crash") {
-    videoOne.loop();
+    //.show();
+    videoOne.play();
   }
 
   if (scene === "iSpy") {
@@ -318,7 +317,7 @@ function iSpyGame() {
   fill("blue");
   text(iSpyLives, 50,50);
   if (iSpyLives === 0) {
-    //you died
+    //you lost screen
     //press space to continue
     //go to after cutscene1 (maze game?) !! **
   }
@@ -379,10 +378,13 @@ function showItems() {
       } 
       else {
         // fill empty squares w transparent blocks
-        fill(0, 0, 0, 0); 
+        strokeWeight(3);
+      stroke("yellow");
+        fill(0, 0, 0, 200); 
       }
 
-      noStroke();
+      //noStroke();
+      
       square(x * cellSize, y * cellSize, cellSize);
     }
   }
@@ -400,6 +402,7 @@ function toggleCell(x,y) {
     else {
       //"collects" found items
       newGrid[y][x] = 0;
+      //items remaining --
       checkEmpty();
 
     }

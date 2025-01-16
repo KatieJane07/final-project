@@ -28,8 +28,9 @@ The story will then lead the player through the process of becoming human again.
 - Bike Or Bike
 
 ## to do
+- bg music
 - cutscene 1
-- either or section
+- either or section images and audio
 - cutscene 2
 - background for ispy game
 - images for find it items (7)
