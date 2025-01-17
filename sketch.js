@@ -3,12 +3,12 @@
 // date
 //
 // Extra for Experts:
-// - describe what you did to take this project "above and beyond"
+// - videos, cursor, combination of arrays and state variables and other things
 
 //canvas and display
 let width = 400;
 let height = 600;
-let scene = "bikeGame";
+let scene = "homeScreen";
 // "homeScreen"
 // "bikeGame"
 // "crash"
@@ -17,6 +17,8 @@ let scene = "bikeGame";
 // "choicesTwo" 
 // "witchCutScene"
 // "iSpy"
+// "endingOne"
+// "endingTwo"
 
 //images
 let startImg;
@@ -30,7 +32,9 @@ let crashImg;
 
 //videos
 let videoOne;
-let onePlay = false;
+let playedOne = false;
+let videoTwo;
+let playedTwo = false;
 
 //bike game
 let theBushes = [];
@@ -71,8 +75,10 @@ function preload() {
   //backgroundtwo
   
   //cutscenes
-  videoOne = createVideo("catLove.mov")
+  videoOne = createVideo("catVid.mov")
   videoOne.hide();
+  videoTwo = createVideo("catLove.mov")
+  videoTwo.hide();
 }
 
 function setup() {
@@ -88,7 +94,6 @@ function setup() {
 
 //
 function draw() {
-  // houseCutScene.hide(); // ??
   if (scene === "homeScreen") {
     homeScreen();
   }
@@ -108,10 +113,15 @@ function draw() {
 
   if (scene === "choicesTwo") {
     choiceTwo();
+    image(videoTwo, 0, 0, 400, 600);
   }
 
   if (scene === "iSpy") {
     iSpyGame();
+  }
+
+  if (scene === "endingOne") {
+    videoTwo.play();
   }
 
   if (scene !== "homeScreen" && scene !== "bikeGame") {
@@ -138,19 +148,17 @@ function keyPressed() {
 
 //
 function mousePressed() {
-  if (scene === "crash") {
-    //.show();
+  if (scene === "crash" && playedOne === false) {
+    //plays video on click
     videoOne.play();
+    playedOne = true;
   }
 
-  if (scene === "iSpy") {
-    let x = Math.floor(mouseX/cellSize);
-    let y = Math.floor(mouseY/cellSize);
-    
-    toggleCell(x,y);
+  else if (scene === "crash" && playedOne === true) {
+    scene = "choicesOne";
   }
 
-  if (scene === "choicesOne") {
+  else if (scene === "choicesOne") {
     if (mouseX < 200) {
       scene = "choicesTwo";
     }
@@ -159,7 +167,6 @@ function mousePressed() {
       //scene = "witchCutScene"; **
     }
   }
-
   //fix!! mouse clicked through the scene
   else if (scene === "choicesTwo") {
     if (mouseY > 300) {
@@ -167,10 +174,17 @@ function mousePressed() {
       //scene = "witchCutScene"; **
     }
     else {
-      scene = "homeScreen";
-      // the end **
+      videoTwo.play();
     }
   }
+  else if (scene === "iSpy") {
+    let x = Math.floor(mouseX/cellSize);
+    let y = Math.floor(mouseY/cellSize);
+    
+    toggleCell(x,y);
+  }
+
+
 }  
 
 //HomeScreen
@@ -298,6 +312,7 @@ function choiceOne() {
   text('right', 350,400);
 }
 
+//choices
 function choiceTwo() {
   // !! **
   background("pink")
@@ -408,10 +423,11 @@ function toggleCell(x,y) {
     }
   }
   if (checkEmpty()) {
-    scene = "homeScreen";
+    scene = "endingOne";
   }
 }
 
+//iSpy Game
 function checkEmpty() {
 // checks if each tile is empty !!
   for (let y = 0; y < GRID_SIZE; y++) {
