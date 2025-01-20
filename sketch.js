@@ -17,7 +17,7 @@ let scene = "homeScreen";
 // "choicesTwo" 
 // "witchCutScene"
 // "iSpy"
-// "endingOne"
+// "catLove"
 // "endingTwo"
 
 //images
@@ -107,21 +107,32 @@ function draw() {
     image(videoOne, 0, 0, 400, 600);
   }
 
+  if (scene === "videoOne") {
+    background("aliceblue");
+    text("oh no im a cat what do i do", 50, 100);
+  }
+
+  if (scene === "videoTwo") {
+    background("aliceblue");
+    text("a witch? oh she says she can make me human again... i accept! i just need to gather a few more things..." ,50, 100);
+  }
+
   if (scene === "choicesOne") {
     choiceOne();
   }
 
   if (scene === "choicesTwo") {
     choiceTwo();
-    image(videoTwo, 0, 0, 400, 600);
   }
 
   if (scene === "iSpy") {
     iSpyGame();
   }
 
-  if (scene === "endingOne") {
-    videoTwo.play();
+  if (scene === "catLove") {
+    image(videoTwo, 0, 0, 400, 600);
+    background("aliceblue");
+    text("oh another cat maybe being a cat isnt so bad after all...", 50, 100);
   }
 
   if (scene !== "homeScreen" && scene !== "bikeGame") {
@@ -155,28 +166,47 @@ function mousePressed() {
   }
 
   else if (scene === "crash" && playedOne === true) {
-    scene = "choicesOne";
+    scene = "videoOne";
   }
 
+  else if (scene === "videoOne") {
+    scene = "choicesOne";
+  }
+  
   else if (scene === "choicesOne") {
     if (mouseX < 200) {
       scene = "choicesTwo";
     }
     else {
-      scene = "iSpy";
+      scene = "videoTwo";
       //scene = "witchCutScene"; **
     }
   }
   //fix!! mouse clicked through the scene
   else if (scene === "choicesTwo") {
     if (mouseY > 300) {
-      scene = "iSpy";
+      scene = "videoTwo";
       //scene = "witchCutScene"; **
     }
     else {
-      videoTwo.play();
+      scene = "catLove";
     }
   }
+
+  else if (scene === "catLove" && playedTwo === false) {
+    videoTwo.play();
+    playedTwo = true;
+  }
+
+  else if (scene === "catLove" && playedTwo === true){
+    background("aliceblue");
+    text("THE END", 200,300);
+  }
+  
+  else if (scene === "videoTwo") {
+    scene = "iSpy";
+  }
+
   else if (scene === "iSpy") {
     let x = Math.floor(mouseX/cellSize);
     let y = Math.floor(mouseY/cellSize);
@@ -320,8 +350,8 @@ function choiceTwo() {
   stroke(5);
   text('where should I go now?', 150, 80);
   line(0,300,400,300);
-  text('left', 50,400);
-  text('right', 350,400);
+  text('up', 100,100);
+  text('down', 100,500);
 }
 
 //iSpy Game
@@ -411,7 +441,7 @@ function toggleCell(x,y) {
     if (newGrid[y][x] === 0) {
       iSpyLives -= 1;
       if (iSpyLives === 0) {
-        background('pink');
+        scene = "choicesOne"
       }
     }
     else {
@@ -423,7 +453,7 @@ function toggleCell(x,y) {
     }
   }
   if (checkEmpty()) {
-    scene = "endingOne";
+    scene = "catLove";
   }
 }
 
