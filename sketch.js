@@ -36,6 +36,10 @@ let playedOne = false;
 let videoTwo;
 let playedTwo = false;
 
+//noises
+let click;
+let bgmusic;
+
 //bike game
 let theBushes = [];
 let collide = false;
@@ -74,11 +78,15 @@ function preload() {
   //backgroundone
   //backgroundtwo
   
-  //cutscenes
+  //videos
   videoOne = createVideo("catVid.mov")
   videoOne.hide();
   videoTwo = createVideo("catLove.mov")
   videoTwo.hide();
+  
+  //noises
+  click = loadSound("click.mp3");
+  bgmusic = loadSound("background.mp3");
 }
 
 function setup() {
@@ -94,6 +102,8 @@ function setup() {
 
 //
 function draw() {
+  //bgmusic.play();
+  //bgmusic.loop();
   if (scene === "homeScreen") {
     homeScreen();
   }
@@ -159,6 +169,7 @@ function keyPressed() {
 
 //
 function mousePressed() {
+  click.play();
   if (scene === "crash" && playedOne === false) {
     //plays video on click
     videoOne.play();
