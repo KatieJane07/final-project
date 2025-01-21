@@ -3,7 +3,11 @@
 // date
 //
 // Extra for Experts:
-// - videos, cursor, combination of arrays and state variables and other things
+// - videos
+// - cursor
+// - click sound
+// - combination of arrays and state variables and other things
+// - mostly just combining a bunch of different things we learned in class into one complicated version
 
 //canvas and display
 let width = 400;
@@ -68,6 +72,7 @@ function preload() {
   bikerImg = loadImage("biker.png");
   bushImg = loadImage("bush.png");
   crashImg = loadImage("crash.jpg");
+
   //ispy
   //ispy bg
   //finditem1
@@ -91,6 +96,7 @@ function preload() {
 
 function setup() {
   createCanvas(width, height);
+
   //music
   bgmusic.play();
   bgmusic.loop();
@@ -120,13 +126,17 @@ function draw() {
   }
 
   if (scene === "videoOne") {
-    background("aliceblue");
-    text("oh no im a cat what do i do", 50, 100);
+    background('aliceblue');
+    fill('black');
+    text("click anywhere to continue", 145, 570);
+    text("oh no im a cat what do i do", 40, 100);
   }
 
   if (scene === "videoTwo") {
-    background("aliceblue");
-    text("a witch? oh she says she can make me human again... i accept! i just need to gather a few more things..." ,50, 100);
+    background('aliceblue');
+    fill('black');
+    text("click anywhere to continue", 145, 570);
+    text("a witch? oh she says she can make me human again... i accept! i just need to gather a few more things..." ,50, 100,350,500);
   }
 
   if (scene === "choicesOne") {
@@ -142,9 +152,11 @@ function draw() {
   }
 
   if (scene === "catLove") {
+    background('aliceblue');
+    fill('black');
+    text("click anywhere to continue", 145, 570);
+    text("oh another cat maybe being a cat isnt so bad after all...", 50, 100,350,500);
     image(videoTwo, 0, 0, 400, 600);
-    background("aliceblue");
-    text("oh another cat maybe being a cat isnt so bad after all...", 50, 100);
   }
 
   if (scene !== "homeScreen" && scene !== "bikeGame") {
@@ -171,7 +183,9 @@ function keyPressed() {
 
 //
 function mousePressed() {
+  //mouse noise
   click.play();
+
   if (scene === "crash" && playedOne === false) {
     //plays video on click
     videoOne.play();
@@ -195,7 +209,7 @@ function mousePressed() {
       //scene = "witchCutScene"; **
     }
   }
-  //fix!! mouse clicked through the scene
+
   else if (scene === "choicesTwo") {
     if (mouseY > 300) {
       scene = "videoTwo";
@@ -212,7 +226,9 @@ function mousePressed() {
   }
 
   else if (scene === "catLove" && playedTwo === true){
-    background("aliceblue");
+    background('aliceblue');
+    fill('black');
+    text("click anywhere to continue", 145, 570);
     text("THE END", 200,300);
   }
   
@@ -226,8 +242,6 @@ function mousePressed() {
     
     toggleCell(x,y);
   }
-
-
 }  
 
 //HomeScreen
@@ -239,14 +253,11 @@ function homeScreen() {
   rect(50,180,300,100);
   image(titleImg, 50, 50);
   image(rulesImg, 50, 310);
-  
   //rules
-  
   //rect(50, 310, 300,75);
   //rect(50,400,300,175);
   image(arrows, 50, 400);
   noStroke();
-
   fill(12, 205, 210);
   rect(262,552,88,20);
   image(startImg, 50, 200, 300 ,90);
@@ -337,15 +348,14 @@ function moveBushes() {
 //crash
 function crashScene() {
   background(crashImg);
-  fill("green");
+  fill("black");
   textSize(20);
-  text("click anywhere to continue", 175, 570);
+  text("click anywhere to continue", 145, 570);
 
 }
 
 //choices
 function choiceOne() {
-  // !! **
   background("green")
   fill("white");
   stroke(5);
@@ -357,7 +367,6 @@ function choiceOne() {
 
 //choices
 function choiceTwo() {
-  // !! **
   background("pink")
   fill("white");
   stroke(5);
@@ -407,7 +416,6 @@ function iSpyGrid(cols, rows) {
 //iSpy Game
 function showItems() {
   //places items randomly
-  // texture!!
   for (let y = 0; y < GRID_SIZE; y++) {
     for (let x = 0; x < GRID_SIZE; x++) {
       if (grid[y][x] === 1) {
