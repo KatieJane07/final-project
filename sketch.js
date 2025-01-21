@@ -91,6 +91,10 @@ function preload() {
 
 function setup() {
   createCanvas(width, height);
+  //music
+  bgmusic.play();
+  bgmusic.loop();
+
   //bush game
   spawnBushes();
   window.setInterval(spawnBushes,650);
@@ -102,8 +106,6 @@ function setup() {
 
 //
 function draw() {
-  //bgmusic.play();
-  //bgmusic.loop();
   if (scene === "homeScreen") {
     homeScreen();
   }
